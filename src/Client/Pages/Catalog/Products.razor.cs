@@ -15,6 +15,7 @@ public partial class Products
     protected IProductsClient ProductsClient { get; set; } = default!;
     [Inject]
     protected IBrandsClient BrandsClient { get; set; } = default!;
+    protected ICategoriesClient CategoriesClient { get; set; } = default!;
 
     protected EntityServerTableContext<ProductDto, Guid, ProductViewModel> Context { get; set; } = default!;
 
@@ -27,9 +28,11 @@ public partial class Products
             entityResource: FSHResource.Products,
             fields: new()
             {
+                new(prod => Config[ConfigNames.ApiBaseUrl]+prod.ImagePath,  L["ImagePath"], "ImagePath", typeof(MudAvatar)),
                 new(prod => prod.Id, L["Id"], "Id"),
                 new(prod => prod.Name, L["Name"], "Name"),
                 new(prod => prod.BrandName, L["Brand"], "Brand.Name"),
+                new(prod => prod.CategoryName, L["Category"], "Category.Name"),
                 new(prod => prod.Description, L["Description"], "Description"),
                 new(prod => prod.Rate, L["Rate"], "Rate")
             },
@@ -40,6 +43,7 @@ public partial class Products
                 var productFilter = filter.Adapt<SearchProductsRequest>();
 
                 productFilter.BrandId = SearchBrandId == default ? null : SearchBrandId;
+                productFilter.CategoryId = SearchCategoryId == default ? null : SearchCategoryId;
                 productFilter.MinimumRate = SearchMinimumRate;
                 productFilter.MaximumRate = SearchMaximumRate;
 
@@ -72,6 +76,7 @@ public partial class Products
                 var exportFilter = filter.Adapt<ExportProductsRequest>();
 
                 exportFilter.BrandId = SearchBrandId == default ? null : SearchBrandId;
+                exportFilter.CategoryId = SearchCategoryId == default ? null : SearchCategoryId;
                 exportFilter.MinimumRate = SearchMinimumRate;
                 exportFilter.MaximumRate = SearchMaximumRate;
 
@@ -92,6 +97,16 @@ public partial class Products
         }
     }
 
+    private Guid _searchCatgoryId;
+    private Guid SearchCategoryId
+    {
+        get => _searchCatgoryId;
+        set
+        {
+            _searchCatgoryId = value;
+            _ = _table.ReloadDataAsync();
+        }
+    }
     private decimal _searchMinimumRate;
     private decimal SearchMinimumRate
     {
@@ -103,7 +118,7 @@ public partial class Products
         }
     }
 
-    private decimal _searchMaximumRate = 9999;
+    private decimal _searchMaximumRate = 999999;
     private decimal SearchMaximumRate
     {
         get => _searchMaximumRate;

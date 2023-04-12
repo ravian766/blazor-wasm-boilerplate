@@ -37,7 +37,7 @@ public partial class Login
         var authState = await AuthState;
         if (authState.User.Identity?.IsAuthenticated is true)
         {
-            Navigation.NavigateTo("/");
+            Navigation.NavigateTo("/dashboard");
         }
     }
 

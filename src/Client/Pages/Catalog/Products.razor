@@ -9,35 +9,41 @@
 
     <AdvancedSearchContent>
         <BrandAutocomplete @bind-Value="SearchBrandId" />
-        <MudSlider T="decimal" @bind-value="SearchMinimumRate" Min="0" Max="9999" Step="100">@L["Minimum Rate"]: @_searchMinimumRate.ToString()</MudSlider>
-        <MudSlider T="decimal" @bind-value="SearchMaximumRate" Min="0" Max="9999" Step="100">@L["Maximum Rate"]: @_searchMaximumRate.ToString()</MudSlider>
+        <CategoryAutocomplete @bind-Value="SearchCategoryId" />
+        <MudSlider T="decimal" @bind-value="SearchMinimumRate" Min="0" Max="999999" Step="100">@L["Minimum Rate"]: @_searchMinimumRate.ToString()</MudSlider>
+        <MudSlider T="decimal" @bind-value="SearchMaximumRate" Min="0" Max="999999" Step="100">@L["Maximum Rate"]: @_searchMaximumRate.ToString()</MudSlider>
     </AdvancedSearchContent>
 
     <EditFormContent>
+       
         @if (!Context.AddEditModal.IsCreate)
         {
             <MudItem xs="12" md="6">
                 <MudTextField Value="context.Id" ReadOnly DisableUnderLine Label="@L[$"Product Id"]" />
-            </MudItem>
+                </MudItem>
         }
+
         <MudItem xs="12" md="6">
             <MudTextField Label="@L["Name"]" For="@(() => context.Name)" @bind-Value="context.Name" />
         </MudItem>
         <MudItem xs="12" md="6">
             <MudTextField Label="@L["Description"]" For="@(() => context.Description)"
-                @bind-Value="context.Description" />
+                          @bind-Value="context.Description" />
         </MudItem>
         <MudItem xs="12" md="6">
-            <BrandAutocomplete For="@(() => context.BrandId)" @bind-Value="context.BrandId" OffsetY="true" />
+            <BrandAutocomplete For="@(() => context.BrandId)" @bind-Value="context.BrandId" />
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <CategoryAutocomplete For="@(() => context.CategoryId)" @bind-Value="context.CategoryId" OffsetY="true" />
         </MudItem>
         <MudItem xs="12" md="6">
             <MudTextField Label="@L["Rate"]" For="@(() => context.Rate)" @bind-Value="context.Rate" />
         </MudItem>
         <MudItem xs="12" md="12">
             <MudItem>
-                @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                @if (!string.IsNullOrEmpty(context.ImageInBytes))
                 {
-                    <MudAvatar Image ="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                    <MudAvatar Image="@context.ImageInBytes" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
                 }
                 else
                 {
@@ -47,26 +53,26 @@
             <MudItem>
                 <div>
                     <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small"
-                        StartIcon="@Icons.Filled.CloudUpload" for="fileInput">
+                               StartIcon="@Icons.Filled.CloudUpload" for="fileInput">
                         @L["Upload"]
                     </MudButton>
-                    @if(!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
+                    @if (!Context.AddEditModal.IsCreate && !string.IsNullOrEmpty(context.ImagePath) && string.IsNullOrEmpty(context.ImageInBytes))
                     {
                         <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Target="_blank"
-                            StartIcon="@Icons.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;" >
-                            @L["View"]
+                               StartIcon="@Icons.Filled.RemoveRedEye" Link="@(Config[ConfigNames.ApiBaseUrl] + @context.ImagePath)" Style="margin-left: 5px;">
+                        @L["View"]
                         </MudButton>
 
                         <MudButton HtmlTag="label" DisableElevation Variant="Variant.Filled" Color="Color.Error" Size="Size.Small"
-                            StartIcon="@Icons.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;" >
-                            @L["Delete"]
+                               StartIcon="@Icons.Filled.Delete" OnClick="SetDeleteCurrentImageFlag" Style="margin-left: 5px;">
+                        @L["Delete"]
                         </MudButton>
                     }
-                    @if(!string.IsNullOrEmpty(context.ImageInBytes))
+                    @if (!string.IsNullOrEmpty(context.ImageInBytes))
                     {
                         <MudButton HtmlTag="label" DisableElevation OnClick="ClearImageInBytes" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" Target="_blank"
-                            StartIcon="@Icons.Filled.Clear" Style="margin-left: 5px;" >
-                            @L["Clear"]
+                               StartIcon="@Icons.Filled.Clear" Style="margin-left: 5px;">
+                        @L["Clear"]
                         </MudButton>
                     }
                 </div>
