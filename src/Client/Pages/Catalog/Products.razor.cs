@@ -28,8 +28,8 @@ public partial class Products
             entityResource: FSHResource.Products,
             fields: new()
             {
-                new(prod => Config[ConfigNames.ApiBaseUrl]+prod.ImagePath,  L["ImagePath"], "ImagePath", typeof(MudAvatar)),
-                new(prod => prod.Id, L["Id"], "Id"),
+                new(prod => Config[ConfigNames.ApiBaseUrl]+prod.ImagePath,  L[""], "ImagePath", typeof(MudAvatar)),
+                // new(prod => prod.Id, L["Id"], "Id"),
                 new(prod => prod.Name, L["Name"], "Name"),
                 new(prod => prod.BrandName, L["Brand"], "Brand.Name"),
                 new(prod => prod.CategoryName, L["Category"], "Category.Name"),

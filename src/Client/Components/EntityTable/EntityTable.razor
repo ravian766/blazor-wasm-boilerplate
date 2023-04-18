@@ -102,7 +102,7 @@
                         }
                         else if (field.Type == typeof(MudAvatar))
                         {
-                            <MudAvatar Image="@field.ValueFunc(context)?.ToString()" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                            <MudAvatar Image="@field.ValueFunc(context)?.ToString()" Square="true" Style="height: auto; width: 100px; max-height: 100%"> </MudAvatar>
                         }
                         else if (field.Type == typeof(bool))
                         {
