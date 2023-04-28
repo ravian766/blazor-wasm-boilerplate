@@ -28,7 +28,8 @@ public partial class Products
             entityResource: FSHResource.Products,
             fields: new()
             {
-                new(prod => Config[ConfigNames.ApiBaseUrl]+prod.ImagePath,  L[""], "ImagePath", typeof(MudAvatar)),
+                new(prod => Config[ConfigNames.ApiBaseUrl] + prod.ImagePath,  L[""], "ImagePath", typeof(MudAvatar)),
+
                 // new(prod => prod.Id, L["Id"], "Id"),
                 new(prod => prod.Name, L["Name"], "Name"),
                 new(prod => prod.BrandName, L["Brand"], "Brand.Name"),
@@ -107,6 +108,7 @@ public partial class Products
             _ = _table.ReloadDataAsync();
         }
     }
+
     private decimal _searchMinimumRate;
     private decimal SearchMinimumRate
     {
