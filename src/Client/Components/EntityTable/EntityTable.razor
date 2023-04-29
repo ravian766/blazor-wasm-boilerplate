@@ -31,7 +31,13 @@
                             CheckedChanged="Context.AllColumnsCheckChanged"></MudCheckBox>
                         @foreach (var field in Context.Fields)
                         {
+                            @if (field.Type == typeof(MudAvatar))
+                            {
+
+                            }
+                            else{
                             <MudCheckBox @bind-Checked="@field.CheckedForSearch" Label="@(field.DisplayName)"></MudCheckBox>
+                            }
                         }
                     </div>
                 }
