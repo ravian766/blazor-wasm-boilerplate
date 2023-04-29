@@ -4,7 +4,8 @@
 @inject IStringLocalizer<SharedResource> LS
 
 <div class="d-flex justify-center">
-    <img src="full-stack-hero-logo.png" Style="height:120px" />
+    @* <img src="full-stack-hero-logo.png" Style="height:120px" /> *@
+    <img src="hmw2.png" Style="height:120px" />
 </div>
 <div class="fsh-center-text">
     <MudText Typo="Typo.h4" GutterBottom="true">Sign In</MudText>
@@ -26,10 +27,10 @@
                 AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField T="string" Label="@L["Tenant"]" Variant="Variant.Outlined" @bind-Value="TenantId"
+            <MudTextField T="string" Label="@L["Tenant"]"  Variant="Variant.Outlined" @bind-Value="TenantId"
                 For="@(() => TenantId)" Required />
         </MudItem>
-        
+
         <MudItem xs="12" md="6">
             <MudButton StartIcon="@Icons.Filled.AppRegistration" Link="/users/self-register">@L["Register?"]</MudButton>
         </MudItem>
