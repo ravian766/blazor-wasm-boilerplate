@@ -4,5 +4,6 @@
         "Blazored",
         "borderradius",
         "Upto"
-    ]
+    ],
+    "dotnet.defaultSolution": "FSH.BlazorWebAssembly.sln"
 }
